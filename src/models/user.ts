@@ -2,6 +2,16 @@ import mongoose from "mongoose";
 import Role from "../_helpers/role.js";
 
 const UserSchema = new mongoose.Schema({
+    firstName: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    lastName: {
+        type: String,
+        required: true,
+        unique: true,
+    },
     username: {
         type: String,
         required: true,
@@ -22,6 +32,10 @@ const UserSchema = new mongoose.Schema({
         default: Role.User,
     },
     created: {
+        type: Date,
+        default: Date.now,
+    },
+    modified: {
         type: Date,
         default: Date.now,
     },
