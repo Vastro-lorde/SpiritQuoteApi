@@ -1,14 +1,5 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 import JWT from 'jsonwebtoken';
-export const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+export const auth = async (req, res, next) => {
     try {
         const token = req.header('Authorization').replace('Bearer ', '');
         const decoded = JWT.verify(token, process.env.JWT_SECRET);
@@ -21,8 +12,8 @@ export const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     catch (error) {
         res.status(401).send({ error: 'Please authenticate.' });
     }
-});
-export const authAdmin = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+};
+export const authAdmin = async (req, res, next) => {
     try {
         const token = req.header('Authorization').replace('Bearer ', '');
         const decoded = JWT.verify(token, process.env.JWT_SECRET);
@@ -37,5 +28,5 @@ export const authAdmin = (req, res, next) => __awaiter(void 0, void 0, void 0, f
     catch (error) {
         res.status(401).send({ error: 'Please authenticate.' });
     }
-});
+};
 //# sourceMappingURL=auth.js.map

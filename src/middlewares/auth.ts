@@ -1,6 +1,6 @@
 import JWT from 'jsonwebtoken';
 import { Response, NextFunction } from 'express';
-import IUserInfoInRequest from '../_helpers/getUserInfoInRequest';
+import IUserInfoInRequest from '../_helpers/getUserInfoInRequest.js';
 
 export const auth = async (req: IUserInfoInRequest, res: Response, next: NextFunction) => {
     try {

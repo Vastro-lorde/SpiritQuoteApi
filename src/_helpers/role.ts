@@ -1,4 +1,4 @@
-const Role ={
+const Role = {
     Admin: "Admin",
     User: "User",
 }
