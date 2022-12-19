@@ -4,6 +4,10 @@ const QuoteSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    picture_url: {
+        type: String,
+        required: true,
+    },
     author: {
         type: String,
         required: true,

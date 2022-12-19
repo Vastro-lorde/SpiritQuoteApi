@@ -3,7 +3,7 @@ export const auth = async (req, res, next) => {
     try {
         const token = req.header('Authorization').replace('Bearer ', '');
         const decoded = JWT.verify(token, process.env.JWT_SECRET);
-        const user = decoded.user;
+        const user = decoded;
         if (!user)
             throw new Error("User not found");
         req.user = user;
@@ -17,7 +17,7 @@ export const authAdmin = async (req, res, next) => {
     try {
         const token = req.header('Authorization').replace('Bearer ', '');
         const decoded = JWT.verify(token, process.env.JWT_SECRET);
-        const user = decoded.user;
+        const user = decoded;
         if (!user)
             throw new Error("User not found");
         if (user.role !== "Admin")

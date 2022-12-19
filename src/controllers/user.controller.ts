@@ -35,8 +35,7 @@ export const registration = async (request: express.Request, response: express.R
             message: error.message,
           });
     }
-  }
-
+}
 
 export const loggingIn = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
     const logInData: LogInDto = request.body;
@@ -74,6 +73,60 @@ export const loggingIn = async (request: express.Request, response: express.Resp
                 message: "User not found"
               });
           }
+    } catch (error) {
+        response.status(500).json({
+            success: false,
+            message: error.message,
+          });
+    }
+}
+
+export const getUser = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+    try {
+        const user = await User.findOne({ _id: request.params.id });
+        if (user) {
+                response.status(200).json({
+                data: user,
+                success: true,
+                message: `Successfull`
+              });
+        } else {
+                response.status(401).json({
+                    success: false,
+                    message: "User not found"
+                  });
+        }
+          
+    } catch (error) {
+        response.status(500).json({
+            success: false,
+            message: error.message,
+          });
+    }
+}
+
+export const getUsers = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+    const {pageSize, page} = request.params;
+
+    try {
+        const user = await User.find({ _id: request.params.id })
+                                .select("-password")
+                                .limit(pageSize? +pageSize : 30 )
+                                .skip((+page - 1) * +pageSize)
+                                .exec();
+        if (user) {
+                response.status(200).json({
+                data: user,
+                success: true,
+                message: `Successfull`
+              });
+        } else {
+                response.status(401).json({
+                    success: false,
+                    message: "User not found"
+                  });
+        }
+          
     } catch (error) {
         response.status(500).json({
             success: false,

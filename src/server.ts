@@ -16,13 +16,12 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan("combined"));
 db().then(()=>{
-
   app.use(routes.home, indexRoute);
   app.listen(port, (err?) => {
     if (err) {
         return console.error(err);
     }
-  console.log(`Server is running on port http://localhost:${port}`);
+    console.log(`Server is running on port http://localhost:${port}`);
   });
 }).catch((error)=>{
   console.log(`Error: ${error}`);
